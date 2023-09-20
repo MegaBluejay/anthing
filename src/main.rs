@@ -49,6 +49,7 @@ fn main() {
     enc.set_depth(png::BitDepth::One);
     let mut writer = enc.write_header().unwrap();
     writer.write_image_data(&board.into_inner()).unwrap();
+    writer.finish().unwrap();
 
     println!("{}", PEAK_ALLOC.peak_usage_as_kb());
 }
