@@ -1,7 +1,4 @@
-use std::{
-    fs::File,
-    io::{BufWriter, Write},
-};
+use std::fs::File;
 
 use bitvec::{prelude::*, slice::BitSliceIndex};
 use peak_alloc::PeakAlloc;
@@ -42,9 +39,8 @@ fn main() {
     println!("{}", board.count_black());
 
     let file = File::create("./out.png").unwrap();
-    let w = BufWriter::new(file);
     let n = N.try_into().unwrap();
-    let mut enc = png::Encoder::new(w, n, n);
+    let mut enc = png::Encoder::new(file, n, n);
     enc.set_color(png::ColorType::Grayscale);
     enc.set_depth(png::BitDepth::One);
     let mut writer = enc.write_header().unwrap();
