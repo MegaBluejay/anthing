@@ -47,8 +47,8 @@ fn main() {
     let mut enc = png::Encoder::new(w, n, n);
     enc.set_color(png::ColorType::Grayscale);
     enc.set_depth(png::BitDepth::One);
-    let mut writer = enc.write_header().unwrap().into_stream_writer().unwrap();
-    writer.write_all(&board.into_inner()).unwrap();
+    let mut writer = enc.write_header().unwrap();
+    writer.write_image_data(&board.into_inner()).unwrap();
 
     println!("{}", PEAK_ALLOC.peak_usage_as_kb());
 }
